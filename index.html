@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Josim VIP Payment System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Josim VIP Payment System</h2>
+
+        <div id="inputSection">
+            <input type="text" id="name" placeholder="Enter Name (e.g., Josim Sekh)" oninput="generateQRCode()">
+            <input type="text" id="upi" placeholder="Enter UPI ID (e.g., darkjsekh@fam)" oninput="generateQRCode()">
+            <input type="number" id="amount" placeholder="Enter Amount (Optional)" oninput="generateQRCode()">
+        </div>
+
+        <div class="bubble-box" id="qrSection">
+            <div id="qrWrapper">
+                <p id="qrDetails" class="hidden">
+                    <strong>Name:</strong> <span id="qrName"></span> <br>
+                    <strong>UPI ID:</strong> <span id="qrUpi"></span> <br>
+                    <strong>Amount:</strong> <span id="qrAmount"></span>
+                </p>
+                <img class="top-image" src="https://i.ibb.co/5X5h9sh6/Picsart-24-01-02-19-43-37-395.jpg">
+                <div id="qrcode"></div>
+                <div class="separator"></div>
+                <p class="timer">⏱️ Time Left: <span id="countdown">4:59</span></p>
+                <img src="https://i.ibb.co/xqYSsNX3/IMG-20250307-150606.jpg" width="100%">
+            </div>
+        </div>
+
+        <button class="download-btn" id="downloadQR" onclick="downloadQRCode()">Download QR Code</button>
+        <button class="download-btn" id="resetQR" onclick="resetQR()">Generate New QR Code</button>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
